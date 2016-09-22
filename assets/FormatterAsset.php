@@ -18,7 +18,7 @@ class FormatterAsset extends AssetBundle
 	}
 	public static $defaultDepends = ['yii\web\JqueryAsset'];
 
-	public $sourcePath = '@bower/formatter.js/dist';
+	public $sourcePath = '@bower/formatter/dist';
 	public $js = [
 		'jquery.formatter.min.js',
 	];

@@ -16,9 +16,10 @@
             "homepage": "https://github.com/alhimik1986/"
         }
     ],
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "bower-asset/formatter": "*",
     },
     "autoload": {
         "psr-4": {

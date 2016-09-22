@@ -14,15 +14,12 @@ class FormatterAsset extends AssetBundle
 	public function init()
 	{
 		parent::init();
-		
-		$this->sourcePath  = realpath( __DIR__ .'/js/formatter/dist');
-		
-		$this->js = [
-			'jquery.formatter.min.js',
-		];
-		
 		$this->depends = self::$defaultDepends;
 	}
-	
 	public static $defaultDepends = ['yii\web\JqueryAsset'];
+
+	public $sourcePath = '@bower/formatter.js/dist';
+	public $js = [
+		'jquery.formatter.min.js',
+	];
 }

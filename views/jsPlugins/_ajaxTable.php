@@ -133,7 +133,7 @@ $afterSuccessCallBack = CJavaScript::encode($_plugins['afterSuccessCallBack']);
 			ajax: function(settings) {
 				var data = settings.create.dom.parents('form').serializeArray();
 				// Добавляю параметры сортировки в отравляемые данные
-				var key, column;
+				var key, column, sorting = window.js_view.sorting['<?php echo $_plugin_key; ?>'];
 				for (key in sorting) {
 					column = key.replace(new RegExp(',', 'g'),  ' '+sorting[key]+','); // Чтобы вместо "{last_name}, {first_name}, {middle_name} desc" получилось "{last_name} desc, {first_name} desc, {middle_name} desc"
 					data.push({

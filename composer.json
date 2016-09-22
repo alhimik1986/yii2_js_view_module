@@ -1,6 +1,6 @@
 {
     "name": "alhimik1986/yii2_js_view_module",
-	"version": "1.0",
+	"version": "1.0-stable",
     "description": "The module allows you insert to your page most used javascript-codes with specified presets.",
     "keywords": [
         "yii2",

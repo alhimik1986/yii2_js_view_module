@@ -64,7 +64,7 @@ Yii::$app->view->registerJs(alhimik1986\yii2_js_view_module\components\JSPlugins
 ```
     "require": {
 		.................
-		"alhimik1986/yii2_js_view_module": "*"
+		"alhimik1986/yii2_js_view_module": "1.0.x-dev"
     },
 ```
 или в командой строке ввести:

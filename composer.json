@@ -1,0 +1,32 @@
+{
+    "name": "alhimik1986/yii2_js_view_module",
+    "description": "The module allows you insert to your page most used javascript-codes with specified presets.",
+    "keywords": [
+        "yii2",
+		"js_view",
+        "module"
+    ],
+    "homepage": "https://github.com/alhimik1986/",
+    "type": "module",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikolay Sidorovich",
+            "email": "sidorovich21101986@mail.ru",
+            "homepage": "https://github.com/alhimik1986/"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "alhimik1986\\yii2_js_view_module\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}

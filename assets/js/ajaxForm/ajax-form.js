@@ -21,7 +21,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		// Параметры по умолчанию.
 		this.defaults = {
 			csrf: {},  // Значение csrf для Yii framework, например, scrf: {YII_CSRF_TOKEN: d156a17a08c8bdaa5220da87a493da0abd07dbc6}.
-			loadingDom: function(settings){return null;}, // jQuery-объект элемента, на котором показывать значок загрузки данных (если указан параметр dataTable, то loadingDom указывать не нужно)
+			loadingElem: function(settings){return null;}, // jQuery-объект элемента, на котором показывать значок загрузки данных (если указан параметр dataTable, то loadingElem указывать не нужно)
 			loadingStyle: function(settings){return 
 				'position:absolute;margin-top:2px;margin-left:3px; width:16px; height:16px; background-image: url("/images/ajax-loader.gif"); background-repeat: no-repeat;';
 			},
@@ -31,7 +31,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 				selector: '.ajax-form',         // Селектор обертки формы (включающую голову, тело и подвал формы)
 				header:   '.ajax-form-title',   // Селектор элемента, при перемещении которого перемещается вся форма
 				resizable:'.resizable',         // Селектор элемента для изменения размеров формы
-				dom: null                       // jQuery-объект формы, которая отправляет данные
+				$: null                         // jQuery-объект формы, которая отправляет данные
 			},
 			// Кнопки закрытия формы
 			close: {
@@ -59,7 +59,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 				dataType  : 'json',            // Тип получаемых ответных данных (в AJAX-запросе)
 				success   : function(data,settings){}, // Функция, которая выполняется, если запрос успешен (с проверкой наличия data.success)
 				                                       // В этой функции обязательно нужно вернуть jQuery-объект полученной формы для ее последующей обработки (для функции afterSuccess)
-				afterSuccess: function(settings,dom){},// Функция, которая выполняется после функции success (служит для последующей обработки появившейся формы, например, сделать форму перемещаемой, применить jquery.chosen для выпадающиего списка внутри формы и т.д.)
+				afterSuccess: function(settings,$elem){},// Функция, которая выполняется после функции success (служит для последующей обработки появившейся формы, например, сделать форму перемещаемой, применить jquery.chosen для выпадающиего списка внутри формы и т.д.)
 				notValid  : function(data,settings){}, // Функция, которая выполняется, если отправляемые данные не валидны.
 				error     : function(xhr, settings){}, // Функция, которая выполняется, если в результате запроса произошла ошибка
 				errorSelector: '#error',       // Место, куда выводить текст ошибки
@@ -69,7 +69,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 				top       : 'auto',            // Расстояние формы от верха окна (по умолчанию центруется по вертикали)
 				left      : 'auto',            // Расстояние от формы до левого края (по умолчанию центруется по горизонтали)
 				minPosY   : 50,                // Минимальный отступ(в пикселях) формы от верхнего края окна
-				dom       : null,              // jQuery-объект элемента, который вызвал событие
+				$         : null,              // jQuery-объект элемента, который вызвал событие
 				e         : null,              // Параметр события при клике (нужен для внутренних целей, как глобальная переменная)
 				xhr       : null,              // Значение, возвращаемое функцией $.ajax()
 				timeout   : 50000              // Таймаут ajax-запроса
@@ -88,12 +88,12 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 				dataType  : 'json',            // Тип получаемых ответных данных (в AJAX-запросе)
 				success   : function(data,settings){}, // Функция, которая выполняется, если запрос успешен (с проверкой наличия data.success)
 				                                       // В этой функции обязательно нужно вернуть jQuery-объект полученной формы для ее последующей обработки (для функции afterSuccess)
-				afterSuccess: function(settings,dom){},// Функция, которая выполняется после функции success (служит для последующей обработки появившейся формы, например, сделать форму перемещаемой, применить jquery.chosen для выпадающиего списка внутри формы и т.д.)
+				afterSuccess: function(settings,$elem){},// Функция, которая выполняется после функции success (служит для последующей обработки появившейся формы, например, сделать форму перемещаемой, применить jquery.chosen для выпадающиего списка внутри формы и т.д.)
 				notValid  : function(data,settings){}, // Функция, которая выполняется, если отправляемые данные не валидны.
 				error     : function(xhr){},   // Функция, которая выполняется, если в результате запроса произошла ошибка
 				errorSelector: '#error',       // Место, куда выводить текст ошибки
 				
-				dom: null,                     // jQuery-объект элемента, который вызвал событие
+				$         : null,              // jQuery-объект элемента, который вызвал событие
 				e         : null,
 				xhr       : null,              // Значение, возвращаемое функцией $.ajax()
 				timeout   : 50000              // Таймаут ajax-запроса
@@ -112,7 +112,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 				dataType  : 'json',            // Тип получаемых ответных данных (в AJAX-запросе)
 				success   : function(data,settings){}, // Функция, которая выполняется, если запрос успешен (с проверкой наличия data.success)
 				                                       // В этой функции обязательно нужно вернуть jQuery-объект полученной формы для ее последующей обработки (для функции afterSuccess)
-				afterSuccess: function(settings,dom){},// Функция, которая выполняется после функции success (служит для последующей обработки появившейся формы, например, сделать форму перемещаемой, применить jquery.chosen для выпадающиего списка внутри формы и т.д.)
+				afterSuccess: function(settings,$elem){},// Функция, которая выполняется после функции success (служит для последующей обработки появившейся формы, например, сделать форму перемещаемой, применить jquery.chosen для выпадающиего списка внутри формы и т.д.)
 				notValid  : function(data,settings){}, // Функция, которая выполняется, если отправляемые данные не валидны.
 				error     : function(xhr){},   // Функция, которая выполняется, если в результате запроса произошла ошибка
 				errorSelector: '#error',       // Место, куда выводить текст ошибки
@@ -132,7 +132,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			dataTable: {
 				init: function(settings) {},
 				selector: '',                 // css-селектор таблицы, к которой применить плагин dataTables
-				dom: null,                    // jQuery-объект DataTables
+				$: null,                      // jQuery-объект DataTables
 				dataTableData: {},            // данные для заполнения таблицы
 				dataTable: function(settings){}, // внутренняя функция, которая применяет плагин dataTables
 				
@@ -147,7 +147,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 				dataType  : 'json',            // Тип получаемых ответных данных (в AJAX-запросе)
 				success   : function(data,settings){}, // Функция, которая выполняется, если запрос успешен (с проверкой наличия data.success)
 				                                       // В этой функции обязательно нужно вернуть jQuery-объект полученной формы для ее последующей обработки (для функции afterSuccess)
-				afterSuccess: function(settings,dom){},// Функция, которая выполняется после функции success (служит для последующей обработки появившейся формы, например, сделать форму перемещаемой, применить jquery.chosen для выпадающиего списка внутри формы и т.д.)
+				afterSuccess: function(settings,$elem){},// Функция, которая выполняется после функции success (служит для последующей обработки появившейся формы, например, сделать форму перемещаемой, применить jquery.chosen для выпадающиего списка внутри формы и т.д.)
 				notValid  : function(data,settings){}, // Функция, которая выполняется, если отправляемые данные не валидны.
 				error     : function(xhr){},   // Функция, которая выполняется, если в результате запроса произошла ошибка
 				errorSelector: '#error',       // Место, куда выводить текст ошибки
@@ -226,7 +226,6 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 							form.find('#'+name).addClass('input-error');
 							form.find('#'+name).next('.chzn-container').addClass('input-error');
 							form.find('#'+name).parents('.field-'+name).addClass('has-error');
-							console.log(form.find('#'+name));
 						}
 						// Сообщения выводятся все подряд.
 						// Если некуда вывести ошибку валидации, то вывожу ее обычным сообщением
@@ -248,10 +247,10 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			var setting = settings._currentSetting;
 			
 			if ( settings.isset(data) &&  settings.isset(data.status) && data.status == 'success' ) {
-				settings.form.dom = setting.success(data.content, settings);
+				settings.form.$ = setting.success(data.content, settings);
 				setting._afterSuccess(setting);
 				setTimeout(function(){
-					setting.afterSuccess(settings, settings.form.dom);
+					setting.afterSuccess(settings, settings.form.$);
 				}, 1);
 			} else if ( settings.isset(data) && settings.isset(data.status) && data.status == 'error' ) {
 				setting._notValid(data.content, setting);
@@ -288,6 +287,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		
 		// Появление формы, если запрос успешен. 
 		var success = function(data, settings) {
+			// Удаляем предыдующую форму, если мы не закроем предыдущую форму и откроем другую, то предыдущие нужно удалять, чтобы они не загромождали друг друга
 			$(settings.form.selector).remove();
 			settings.showLoading(false);
 			settings.unblockButtons(settings);
@@ -297,7 +297,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		
 		// Системная пост-обработка формы (делаю форму перемещаемой)
 		var _afterSuccess = function(setting) {
-			var form = settings.form.dom;
+			var form = settings.form.$;
 			if ( ! form)
 				return;
 			
@@ -307,7 +307,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			// Привязываю событие для кнопки "Отравка данных с формы"
 			//form.find(settings.submit.selector).on(settings.submit.on, function(e) {
 			form.on(settings.submit.on, settings.submit.selector, function(e) {
-				settings.submit.dom = $(this);
+				settings.submit.$ = $(this);
 				settings.submit.e = e;
 				settings.submit._send(settings.submit);
 				return false;
@@ -321,11 +321,11 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		
 		// Обработка формы, чтобы форма была по центру и могла перемещаться мышкой
 		var _centerFormAndDraggable = function(setting) {
-			//var form = settings.form.dom;
+			//var form = settings.form.$;
 			//var e = setting.e, posX = e.pageX, posY = e.pageY, minTop = setting.minTop, maxLeft = setting.maxLeft, posY = minTop, posX = maxLeft;
 			//if ((e.pageY - $(window).scrollTop()) > minTop) posY = $(window).scrollTop() + minTop;
 			//if ((e.pageX - $(window).scrollLeft()) > maxLeft) posX = $(window).scrollLeft() + maxLeft;
-			var form = settings.form.dom;
+			var form = settings.form.$;
 			
 			var e = setting.e,
 				posX = (setting.left == 'auto') ? $(window).scrollLeft() + Math.round(($(window).width()  - form.width())  / 2) : setting.left,
@@ -405,13 +405,13 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			if ( ! settings.isset(settings.options.initForm) ) return;
 			
 			settings.form.selector = settings.initForm.selector;
-			settings.form.dom = $(settings.initForm.selector).is('form') ? $(settings.initForm.selector) : $(settings.initForm.selector).find('form');
-			var form = settings.form.dom;
+			settings.form.$ = $(settings.initForm.selector).is('form') ? $(settings.initForm.selector) : $(settings.initForm.selector).find('form');
+			var form = settings.form.$;
 			
 			// Привязываю событие для кнопки "Отравка данных с формы"
 			//$(settings.form.selector).find(settings.submit.selector).on(settings.submit.on, function(e) {
 			$(settings.form.selector).on(settings.submit.on, settings.submit.selector, function(e) {
-				settings.submit.dom = $(this);
+				settings.submit.$ = $(this);
 				settings.submit.e = e;
 				settings.submit._send(settings.submit);
 				return false;
@@ -435,7 +435,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		// Появление формы
 		this.defaults.create._init = function(settings) {
 			$(settings.create.delegator).on(settings.create.on, settings.create.selector, function(e) {
-				settings.create.dom = $(this);
+				settings.create.$ = $(this);
 				settings.create.e = e;
 				settings.create._send(settings.create);
 				return false;
@@ -543,7 +543,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			dataTableOptions['fnRowCallback'] = fnRowCallback;
 			
 			// Уничтожаю предыдущий экземпляр таблицы, если он есть
-			if (settings.dataTable.dom != null && typeof(settings.dataTable.dom.fnDestroy) != 'undefined') settings.dataTable.dom.fnDestroy();
+			if (settings.dataTable.$ != null && typeof(settings.dataTable.$.fnDestroy) != 'undefined') settings.dataTable.$.fnDestroy();
 			
 			var $dataTables = $(settings.dataTable.selector).dataTable(dataTableOptions);
 			if (typeof(settings.dataTable.updateTooltip) === 'function') settings.dataTable.updateTooltip($dataTables);
@@ -554,7 +554,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			settings.dataTable.dataTableData = '';
 			
 			// Сохраняю jQuery-объект плагина
-			settings.dataTable.dom = $dataTables;
+			settings.dataTable.$ = $dataTables;
 			
 			// Инициализирую всплывающие подсказки при каждом обновлении таблицы.
 			$dataTables.on('draw', function(){
@@ -610,11 +610,11 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			}
 			//var attributes = aData['attributes'];
 			
-			/*settings.dataTable.dom.fnUpdate(aData, $nRow[0]);
-			settings.dataTable.dom.fnDraw();*/
+			/*settings.dataTable.$.fnUpdate(aData, $nRow[0]);
+			settings.dataTable.$.fnDraw();*/
 			
 			// Обновляю строку так, чтобы не сбрасывался пейджер (не уходил на первую страницу)
-			settings.dataTable.dom.fnUpdate(aData, $nRow[0], iColumn=undefined, bRedraw=false);
+			settings.dataTable.$.fnUpdate(aData, $nRow[0], iColumn=undefined, bRedraw=false);
 		};
 		
 		/**
@@ -624,12 +624,12 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		 */
 		this.defaults.dataTable.updateAll = function(oData, settings) {
 			var dataTableOptions = settings.dataTable.dataTableOptions;
-			settings.dataTable.dom.fnClearTable();
+			settings.dataTable.$.fnClearTable();
 			
 			dataTableOptions['aaData'] = oData;
 			dataTableOptions['fnRowCallback'] = fnRowCallback;
 			
-			settings.dataTable.dom.fnAddData(oData);
+			settings.dataTable.$.fnAddData(oData);
 			
 			// Очищаю поле для бережения памяти
 			settings.dataTable.dataTableData = '';
@@ -641,24 +641,24 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		/**
 		 * Показать скрыть значок загрузки.
 		 * @param boolean show Показать-скрыть значок загрузки.
-		 * @param mixed dom jQuery-объект или селектор в виде строки, рядом с которым разместить значок загрузки.
+		 * @param mixed $elem jQuery-объект или селектор в виде строки, рядом с которым разместить значок загрузки.
 		 */
-		this.defaults.showLoading = function(show, dom) {
+		this.defaults.showLoading = function(show, $elem) {
 			if ( ! settings.isset(show)) show = true;
-			if ( ! settings.isset(dom)) dom = settings.dataTable.dom;
-			if ( ! settings.isset(dom)) dom = settings.loadingDom(settings);
-			if (typeof dom == 'string' || dom instanceof String) dom = jQuery(dom);
-			if (settings.isset(dom) && dom.length > 0) {
+			if ( ! settings.isset($elem)) $elem = settings.dataTable.$;
+			if ( ! settings.isset($elem)) $elem = settings.loadingElem(settings);
+			if (typeof $elem == 'string' || $elem instanceof String) $elem = jQuery($elem);
+			if (settings.isset($elem) && $elem.length > 0) {
 				if (show) {
-					if (dom.parent().find('.ajax-loading').length == 0) {
-						dom.before('<div class="ajax-loading" style="'+settings.loadingStyle(settings)+'"></div>');
+					if ($elem.parent().find('.ajax-loading').length == 0) {
+						$elem.before('<div class="ajax-loading" style="'+settings.loadingStyle(settings)+'"></div>');
 					}
 					settings._loadingRequests.push(true); // Увеличиваю счетчик отправленных запросов на 1.
 				} else {
 					settings._loadingRequests.shift(); // Уменьшаю счетчик отправленных запросов на 1.
 					// Если число запросов равно числу ответов, то убираю значок загрузки
 					if (settings._loadingRequests.length == 0) {
-						dom.parent().find('.ajax-loading').remove();
+						$elem.parent().find('.ajax-loading').remove();
 					}
 				}
 			}
@@ -671,14 +671,14 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		this.defaults.blockButtons = function(settings) {
 			jQuery(settings.create.selector).addClass('blocked');
 			
-			if (settings.submit.dom) {
-				settings.submit.dom.parents('form').find(settings.submit.selector).addClass('blocked');
+			if (settings.submit.$) {
+				settings.submit.$.parents('form').find(settings.submit.selector).addClass('blocked');
 			} else {
 				jQuery(settings.submit.selector).addClass('blocked');
 			}
 			
-			if (typeof(settings.close.dom) != 'undefined' && settings.close.dom !== null) {
-				settings.close.dom.parents('form').find(settings.close.selector).addClass('blocked');
+			if (typeof(settings.close.$) != 'undefined' && settings.close.$ !== null) {
+				settings.close.$.parents('form').find(settings.close.selector).addClass('blocked');
 			} else {
 				jQuery(settings.close.selector).addClass('blocked');
 			}
@@ -691,14 +691,14 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		this.defaults.unblockButtons = function(settings) {
 			jQuery(settings.create.selector).removeClass('blocked');
 			
-			if (settings.submit.dom) {
-				settings.submit.dom.parents('form').find(settings.submit.selector).removeClass('blocked');
+			if (settings.submit.$) {
+				settings.submit.$.parents('form').find(settings.submit.selector).removeClass('blocked');
 			} else {
 				jQuery(settings.submit.selector).removeClass('blocked');
 			}
 			
-			if (typeof(settings.close.dom) != 'undefined' && settings.close.dom !== null) {
-				settings.close.dom.parents('form').find(settings.close.selector).removeClass('blocked');
+			if (typeof(settings.close.$) != 'undefined' && settings.close.$ !== null) {
+				settings.close.$.parents('form').find(settings.close.selector).removeClass('blocked');
 			} else {
 				jQuery(settings.close.selector).removeClass('blocked');
 			}
@@ -714,8 +714,8 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			$(document).off(settings.create.on, settings.create.selector);
 			$(document).off(settings.close.on, settings.form.selector + ' ' + settings.close.selector);
 			$(document).off(settings.submit.on, settings.form.selector + ' ' + settings.submit.selector);
-			settings.form.dom && settings.form.dom.off(settings.submit.on, settings.submit.selector);
-			ajaxFormResizable(settings.form.dom, settings.form.dom.find('.ajax-form-body'), $(settings.form.resizable), true);
+			settings.form.$ && settings.form.$.off(settings.submit.on, settings.submit.selector);
+			ajaxFormResizable(settings.form.$, settings.form.$.find('.ajax-form-body'), $(settings.form.resizable), true);
 		};
 		
 		
@@ -783,12 +783,12 @@ ajaxFormMessage = function(selector, type, text) {
 
 // **************************************************************************************************************
 // Функция: ajaxFormResizable - позволяет элементу менять размеры
-// @param jQuery  dom     - jquery-объект элемента, у которого нужно менять размер
+// @param jQuery  $elem     - jquery-объект элемента, у которого нужно менять размер
 // @param jQuery  handle  - jquery-объект элемента, из-за которого меняется размер
 // @param boolean destroy - если true - то удаляю события, связанные с изменением размеров
 // # http://stackoverflow.com/questions/4673348/emulating-frame-resize-behavior-with-divs-using-jquery-without-using-jquery-ui
 // **************************************************************************************************************
-ajaxFormResizable = function(domWidth, domHeight, handle, destroy) {
+ajaxFormResizable = function($elemWidth, $elemHeight, handle, destroy) {
 	if (typeof(destroy) != 'undefined' && destroy == true) {
 		handle.off('mousedown', mousedown);
 		jQuery(document).off('mouseup', mouseup);
@@ -808,11 +808,11 @@ ajaxFormResizable = function(domWidth, domHeight, handle, destroy) {
 	};
 	
 	var mousemoveHandle = function(){
-		domWidth.css({
-			width:  Math.max(370,  domWidth.scrollLeft() - domWidth.offset().left + lastE.pageX) + 'px'
+		$elemWidth.css({
+			width:  Math.max(370,  $elemWidth.scrollLeft() - $elemWidth.offset().left + lastE.pageX) + 'px'
 		});
-		domHeight.css({
-			height: Math.max(100, domHeight.scrollTop() - domHeight.offset().top + lastE.pageY) + 'px'
+		$elemHeight.css({
+			height: Math.max(100, $elemHeight.scrollTop() - $elemHeight.offset().top + lastE.pageY) + 'px'
 		});
 		processing = false;
 	};
@@ -825,7 +825,7 @@ ajaxFormResizable = function(domWidth, domHeight, handle, destroy) {
 		jQuery(document).off('mousemove', mousemove);
 	};
 	setTimeout(function(){
-		p = {minWidth: domWidth.width(), minHeight: domHeight.height()};
+		p = {minWidth: $elemWidth.width(), minHeight: $elemHeight.height()};
 	}, 1000);
 	handle.on('mousedown', mousedown);
 	jQuery(document).on('mouseup', mouseup);

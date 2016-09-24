@@ -120,7 +120,7 @@ $afterSuccessCallBack = CJavaScript::encode($_plugins['afterSuccessCallBack']);
 	//--------------------------------------------------------------
 	new ajaxForm({
 		csrf: {<?php echo Yii::$app->request->csrfParam . ":'" . Yii::$app->request->csrfToken."'"; ?>},
-		loadingDom: function(settings){return '<?php echo $tbl_selector; ?>';},
+		loadingElem: function(settings){return '<?php echo $tbl_selector; ?>';},
 		loadingStyle: function(settings){
 			var result = 'position:absolute;margin-top:2px;margin-left:3px; width:16px; height:16px; background-repeat: no-repeat;';
 			result += "<?php echo $loading_img ? 'background-image: url(\''.$loading_img.'\');' : ''; ?>";
@@ -131,7 +131,7 @@ $afterSuccessCallBack = CJavaScript::encode($_plugins['afterSuccessCallBack']);
 			on: 'search next',
 			errorSelector: '<?php echo $error_selector; ?>',
 			ajax: function(settings) {
-				var data = settings.create.dom.parents('form').serializeArray();
+				var data = settings.create.$.parents('form').serializeArray();
 				// Добавляю параметры сортировки в отравляемые данные
 				var key, column, sorting = window.js_view.sorting['<?php echo $_plugin_key; ?>'];
 				for (key in sorting) {
@@ -153,9 +153,9 @@ $afterSuccessCallBack = CJavaScript::encode($_plugins['afterSuccessCallBack']);
 				};
 			},
 			success: function(data, settings) {
-				settings.create.dom.parents('form').find('<?php echo $tbl_selector; ?> tbody').html(data);
+				settings.create.$.parents('form').find('<?php echo $tbl_selector; ?> tbody').html(data);
 				// Перехожу на первую страницу пейджера, если на текущей странице нет результатов
-				var $table = settings.create.dom;
+				var $table = settings.create.$;
 				if ($table.find('tbody tr.tr-pager').length > 0 && $table.find('tbody tr:not(.tr-pager)').length == 0) {
 					$table.find('tr.tr-pager').append('<div class="pager-links"><input type="hidden" id="page" name="page" value="1"></div>');
 					$table.trigger('search');

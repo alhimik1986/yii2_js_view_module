@@ -10,14 +10,14 @@
 	var date_selector = '<?php echo $search_on_change_dateSelector; ?>';
 	
 	// задежка между отправками данных
-	var search_timeout = 300; search_timer = function(){}; var search_on_change_dom;
-	var search_on_change = function(dom) {
-		search_on_change_dom = dom;
+	var search_timeout = 300; search_timer = function(){}; var $search_on_change_elem;
+	var search_on_change = function($elem) {
+		$search_on_change_elem = $elem;
 		if (search_timer) {
 			clearTimeout(search_timer);
 		}
 		search_timer = setTimeout(function(){
-			search_on_change_dom.parents('form').find(tbl_selector).trigger('search');
+			$search_on_change_elem.parents('form').find(tbl_selector).trigger('search');
 		}, search_timeout);
 	};
 	

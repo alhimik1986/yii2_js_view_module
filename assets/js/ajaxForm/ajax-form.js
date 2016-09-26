@@ -356,7 +356,7 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 			}
 			
 			// Даю форме изменять размеры
-			ajaxFormResizable(form, form.find('.ajax-form-body'), $(settings.form.resizable));
+			ajaxFormResizable(form, form.find('.ajax-form-body'), form.find('.ajax-form-footer'), $(settings.form.resizable));
 		};
 		
 		// Отправка запроса
@@ -711,11 +711,12 @@ var ajaxFormResizable = function(){}; // Функция, которая позв
 		// **************** Пример: var f = new ajaxForm(); f.destroy(); ******************************************
 		// *********************************************************************************************************
 		this.defaults.destroy = function() {
+			var $form = settings.form.$;
 			$(document).off(settings.create.on, settings.create.selector);
 			$(document).off(settings.close.on, settings.form.selector + ' ' + settings.close.selector);
 			$(document).off(settings.submit.on, settings.form.selector + ' ' + settings.submit.selector);
 			settings.form.$ && settings.form.$.off(settings.submit.on, settings.submit.selector);
-			ajaxFormResizable(settings.form.$, settings.form.$.find('.ajax-form-body'), $(settings.form.resizable), true);
+			ajaxFormResizable($form, $form.find('.ajax-form-body'), $form.find('.ajax-form-footer'), $(settings.form.resizable), true);
 		};
 		
 		
@@ -783,12 +784,14 @@ ajaxFormMessage = function(selector, type, text) {
 
 // **************************************************************************************************************
 // Функция: ajaxFormResizable - позволяет элементу менять размеры
-// @param jQuery  $elem     - jquery-объект элемента, у которого нужно менять размер
+// @param jQuery  $elemWidth - jquery-объект элемента, у которого нужно менять ширину
+// @param jQuery  $elemHeight - jquery-объект элемента, у которого нужно менять высоту
+// @param integer $elemHightCorrection - элемент, от высоты которого зависит коорректировка по высоте (корректирует смещение при изменении высоты)
 // @param jQuery  handle  - jquery-объект элемента, из-за которого меняется размер
 // @param boolean destroy - если true - то удаляю события, связанные с изменением размеров
 // # http://stackoverflow.com/questions/4673348/emulating-frame-resize-behavior-with-divs-using-jquery-without-using-jquery-ui
 // **************************************************************************************************************
-ajaxFormResizable = function($elemWidth, $elemHeight, handle, destroy) {
+ajaxFormResizable = function($elemWidth, $elemHeight, $elemHightCorrection, handle, destroy) {
 	if (typeof(destroy) != 'undefined' && destroy == true) {
 		handle.off('mousedown', mousedown);
 		jQuery(document).off('mouseup', mouseup);
@@ -812,7 +815,7 @@ ajaxFormResizable = function($elemWidth, $elemHeight, handle, destroy) {
 			width:  Math.max(370,  $elemWidth.scrollLeft() - $elemWidth.offset().left + lastE.pageX + 5) + 'px'
 		});
 		$elemHeight.css({
-			height: Math.max(100, $elemHeight.scrollTop() - $elemHeight.offset().top - ($elemHeight.offset().top - $elemWidth.offset().top + 12) + lastE.pageY) + 'px'
+			height: Math.max(100, $elemHeight.scrollTop() - $elemHeight.offset().top - ($elemHightCorrection.height() + 12) + lastE.pageY) + 'px'
 		});
 		processing = false;
 	};

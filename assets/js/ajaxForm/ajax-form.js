@@ -809,10 +809,10 @@ ajaxFormResizable = function($elemWidth, $elemHeight, handle, destroy) {
 	
 	var mousemoveHandle = function(){
 		$elemWidth.css({
-			width:  Math.max(370,  $elemWidth.scrollLeft() - $elemWidth.offset().left + lastE.pageX) + 'px'
+			width:  Math.max(370,  $elemWidth.scrollLeft() - $elemWidth.offset().left + lastE.pageX + 5) + 'px'
 		});
 		$elemHeight.css({
-			height: Math.max(100, $elemHeight.scrollTop() - $elemHeight.offset().top + lastE.pageY) + 'px'
+			height: Math.max(100, $elemHeight.scrollTop() - $elemHeight.offset().top - ($elemHeight.offset().top - $elemWidth.offset().top + 12) + lastE.pageY) + 'px'
 		});
 		processing = false;
 	};

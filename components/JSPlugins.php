@@ -19,7 +19,7 @@ class JSPlugins
 		$plugin[$key] = isset($plugin[$key]) ? $plugin[$key] : $defaultValue;
 	}
 	public static $includePlugins = [];
-	
+
 	/**
 	 * Подключить заданные javascript плагины.
 	 * 
@@ -27,7 +27,7 @@ class JSPlugins
 	 * @return string Код javascript, содержащий js-плагины.
 	 *
 	 * Таким образом можно подключить следующие плагины с задаными параметрами (образец, просто копируйте эти строки и удаляйте ненужное):
-	 * 
+	 *
 	Yii::$app->view->registerJs(alhimik1986\yii2_js_view_module\components\JSPlugins::includePlugins([
 		'formatter' => [[
 			'selector' => '.date-formatter',
@@ -121,6 +121,7 @@ class JSPlugins
 	]));
 	 * 
 	 */
+
 	public static function includePlugins($plugins)
 	{
 		$baseUrl = Yii::$app->getUrlManager()->getBaseUrl();
